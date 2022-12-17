@@ -7,11 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.movieapp.commonUtils.ConnectivityObserver
+import com.movieapp.commonUtils.NetworkConnectivityObserver
 import com.movieapp.databinding.FragmentMovieDetailBinding
 import com.movieapp.presentation.viewModel.MovieDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
@@ -24,8 +29,18 @@ class MovieDetailFragment : Fragment() {
 
     private val viewModel: MovieDetailViewModel by viewModels()
 
+    private lateinit var connectivityObserver : ConnectivityObserver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        connectivityObserver = NetworkConnectivityObserver(requireContext())
+        connectivityObserver.observe().onEach {
+            if(!it.name.matches(Regex("Available")))
+            {
+                println("Network Status is $it")
+            }
+        }.launchIn(lifecycleScope)
     }
 
     override fun onCreateView(

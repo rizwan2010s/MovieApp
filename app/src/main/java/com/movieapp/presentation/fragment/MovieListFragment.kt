@@ -8,12 +8,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.movieapp.commonUtils.ConnectivityObserver
+import com.movieapp.commonUtils.NetworkConnectivityObserver
 import com.movieapp.databinding.FragmentMovieListBinding
 import com.movieapp.databinding.ViewHolderMovieListBinding
 import com.movieapp.domain.model.MovieList
 import com.movieapp.presentation.viewModel.MovieListViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment() {
@@ -26,8 +31,19 @@ class MovieListFragment : Fragment() {
 
     private val movieListAdapter = MovieListAdapter()
 
+    private lateinit var connectivityObserver : ConnectivityObserver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        connectivityObserver = NetworkConnectivityObserver(requireContext())
+        connectivityObserver.observe().onEach {
+            if(!it.name.matches(Regex("Available")))
+            {
+                println("Network Status is $it")
+            }
+        }.launchIn(lifecycleScope)
+
     }
 
     override fun onCreateView(
@@ -41,6 +57,7 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding.rvMovieList.apply {
             adapter = movieListAdapter
