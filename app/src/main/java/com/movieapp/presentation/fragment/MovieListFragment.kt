@@ -60,8 +60,7 @@ class MovieListFragment : Fragment() {
                 }
             }
         }
-//region abc
-//endregion
+        
         movieListAdapter.itemClickListener {
             findNavController().navigate(
                 MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieId = it.id!!)
