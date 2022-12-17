@@ -48,12 +48,16 @@ class MovieDetailFragment : Fragment() {
             viewModel.movieDetail.collect{
                 if(it.isLoading)
                 {
-
+                    binding.showLoading.visibility = View.VISIBLE
+                    binding.dataFetch.visibility = View.GONE
                 }
                 if(it.error.isNotBlank())
                 {
-
+                    binding.showLoading.visibility = View.GONE
+                    binding.dataFetch.visibility = View.VISIBLE
                 }
+                binding.showLoading.visibility = View.GONE
+                binding.dataFetch.visibility = View.VISIBLE
                 it.data?.let { binding.movieDetail= it }
             }
         }

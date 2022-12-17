@@ -60,7 +60,7 @@ class MovieListFragment : Fragment() {
                 }
             }
         }
-        
+
         movieListAdapter.itemClickListener {
             findNavController().navigate(
                 MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieId = it.id!!)
@@ -68,7 +68,7 @@ class MovieListFragment : Fragment() {
         }
     }
 }
-
+//region MovieListAdapter
 class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MyViewHolder>() {
 
     private var listener :((MovieList)->Unit)?=null
@@ -111,3 +111,4 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MyViewHolder>() {
         return this.list.size
     }
 }
+//endregion
