@@ -16,6 +16,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:isScrollContainer="true"
         android:orientation="vertical"
         android:scrollbars="vertical"
@@ -99,12 +100,32 @@
 
         </LinearLayout>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/showLoading"
-            android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/showLoading"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/showInternetStatus"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="Check your Internet Connection"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:visibility="gone" />
+        </LinearLayout>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

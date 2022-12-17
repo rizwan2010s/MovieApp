@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:background="@color/white"
         tools:context=".presentation.fragment.MovieListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/showLoading"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/showInternetStatus"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="Check your Internet Connection"
+            android:textStyle="bold"
+            android:textColor="@color/red"
             android:visibility="gone" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

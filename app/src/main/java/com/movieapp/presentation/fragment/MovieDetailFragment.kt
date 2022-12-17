@@ -38,7 +38,13 @@ class MovieDetailFragment : Fragment() {
         connectivityObserver.observe().onEach {
             if(!it.name.matches(Regex("Available")))
             {
-                println("Network Status is $it")
+                binding.showInternetStatus.visibility = View.VISIBLE
+                binding.dataFetch.visibility = View.GONE
+            }
+            else
+            {
+                binding.showInternetStatus.visibility = View.GONE
+                binding.dataFetch.visibility = View.VISIBLE
             }
         }.launchIn(lifecycleScope)
     }

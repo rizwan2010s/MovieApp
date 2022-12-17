@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:orientation="vertical"
+        android:background="@color/white"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
@@ -44,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="8dp"
+                    android:background="@color/white"
                     android:layout_gravity="left|center"
                     android:gravity="left|center"
                     android:textColor="@color/black"
