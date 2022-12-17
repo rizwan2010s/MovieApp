@@ -9,6 +9,8 @@ import com.movieapp.R
 
 @BindingAdapter("urlToImage")
 fun urlToImage(view: ImageView, url: String?) {
+
+        //Bind Images on Glide
         url?.let {
                 val options =
                         RequestOptions.placeholderOf(R.drawable.loading).error(R.drawable.error)

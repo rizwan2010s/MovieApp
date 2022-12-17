@@ -3,6 +3,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ConnectivityObserver {
 
+    //Interface for checking the Internet Status
     fun observe(): Flow<Status>
 
     enum class Status{

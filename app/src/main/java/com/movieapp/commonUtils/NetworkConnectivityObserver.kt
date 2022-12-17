@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
+//Checking the Internet Status through out hte app
 class NetworkConnectivityObserver(
     private val context: Context
 ):ConnectivityObserver{
