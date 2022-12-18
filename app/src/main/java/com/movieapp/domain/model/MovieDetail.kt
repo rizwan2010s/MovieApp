@@ -6,5 +6,4 @@ data class MovieDetail(
     val releaseDate: String?,
     val imagePath: String?,
     val overview: String?,
-) {
-}
+)

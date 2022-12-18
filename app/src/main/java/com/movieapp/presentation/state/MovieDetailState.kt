@@ -8,5 +8,4 @@ data class MovieDetailState(
     val data:MovieDetail? = null,
     val error: String = EMPTY_STRING,
     val isLoading: Boolean = FALSE
-) {
-}
+)

@@ -21,7 +21,7 @@ class GetMovieListUseCase @Inject constructor(private val repository: MovieRepos
             val response = repository.getMovieList()
             val listMovie =
                 if(response.results.isNullOrEmpty())
-                    emptyList<MovieList>()
+                    emptyList()
                 else
                     response.results.map { it.toDomainMovieList() }
 

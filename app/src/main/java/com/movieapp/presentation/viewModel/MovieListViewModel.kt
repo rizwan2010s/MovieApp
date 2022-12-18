@@ -1,6 +1,5 @@
 package com.movieapp.presentation.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.movieapp.commonUtils.Resource
@@ -16,14 +15,14 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieListViewModel @Inject constructor(private val getMovieListUseCase: GetMovieListUseCase): ViewModel() {
 
-    private val _movieList = MutableStateFlow<MovieListState>(MovieListState())
+    private val _movieList = MutableStateFlow(MovieListState())
     val movieList : StateFlow<MovieListState> = _movieList
 
     init {
         movieList()
     }
 
-    fun movieList()
+    private fun movieList()
     {
         getMovieListUseCase.invoke().onEach {
             when(it)

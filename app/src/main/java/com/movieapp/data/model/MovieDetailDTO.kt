@@ -1,42 +1,67 @@
 package com.movieapp.data.model
 
+import com.google.gson.annotations.SerializedName
 import com.movieapp.domain.model.MovieDetail
-import com.movieapp.domain.model.MovieList
 
 data class MovieDetailDTO(
-    val adult: Boolean,
-    val backdrop_path: String,
-    val belongs_to_collection: Any,
-    val budget: Int,
-    val genres: List<Genre>,
-    val homepage: String,
-    val id: Int,
-    val imdb_id: String,
-    val original_language: String,
-    val original_title: String,
-    val overview: String,
-    val popularity: Double,
-    val poster_path: String,
-    val production_companies: List<ProductionCompany>,
-    val production_countries: List<ProductionCountry>,
-    val release_date: String,
-    val revenue: Int,
-    val runtime: Int,
-    val spoken_languages: List<SpokenLanguage>,
-    val status: String,
-    val tagline: String,
-    val title: String,
-    val video: Boolean,
-    val vote_average: Double,
-    val vote_count: Int
+    @SerializedName("adult")
+    val adult: Boolean?,
+    @SerializedName("backdrop_path")
+    val backDropPath: String?,
+    @SerializedName("belongs_to_collection")
+    val belongsToCollection: Any?,
+    @SerializedName("budget")
+    val budget: Int?,
+    @SerializedName("genres")
+    val genres: List<Genre>?,
+    @SerializedName("homepage")
+    val homepage: String?,
+    @SerializedName("id")
+    val id: Int?,
+    @SerializedName("imdb_id")
+    val imdbId: String?,
+    @SerializedName("original_language")
+    val originalLanguage: String?,
+    @SerializedName("original_title")
+    val originalTitle: String?,
+    @SerializedName("overview")
+    val overview: String?,
+    @SerializedName("popularity")
+    val popularity: Double?,
+    @SerializedName("poster_path")
+    val posterPath: String?,
+    @SerializedName("production_companies")
+    val productionCompanies: List<ProductionCompany>?,
+    @SerializedName("production_countries")
+    val productionCountries: List<ProductionCountry>?,
+    @SerializedName("release_date")
+    val releaseDate: String?,
+    @SerializedName("revenue")
+    val revenue: Long?,
+    @SerializedName("runtime")
+    val runtime: Int?,
+    @SerializedName("spoken_languages")
+    val spokenLanguages: List<SpokenLanguage>?,
+    @SerializedName("status")
+    val status: String?,
+    @SerializedName("tagline")
+    val tagline: String?,
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("video")
+    val video: Boolean?,
+    @SerializedName("vote_average")
+    val voteAverage: Double?,
+    @SerializedName("vote_count")
+    val voteCount: Int?
 )
 fun MovieDetailDTO.toDomainMovieDetail() : MovieDetail
 {
     return MovieDetail(
         id = this.id,
-        name = this.original_title,
-        releaseDate = this.release_date,
-        imagePath = this.poster_path,
+        name = this.originalTitle,
+        releaseDate = this.releaseDate,
+        imagePath = this.posterPath,
         overview = this.overview
-    );
+    )
 }

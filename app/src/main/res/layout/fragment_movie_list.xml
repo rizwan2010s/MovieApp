@@ -36,7 +36,7 @@
             android:textSize="18sp"
             android:padding="10dp"
             android:gravity="center"
-            android:text="Check your Internet Connection"
+            android:text="@string/internetConnectionStatus"
             android:textStyle="bold"
             android:textColor="@color/red"
             android:visibility="gone" />

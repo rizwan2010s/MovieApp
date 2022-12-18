@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.onEach
 class MovieListFragment : Fragment() {
 
     private var _binding : FragmentMovieListBinding? = null
-        val binding: FragmentMovieListBinding
+        private val binding: FragmentMovieListBinding
         get() = _binding!!
 
     private val movieListViewModel: MovieListViewModel by viewModels()
@@ -38,7 +38,7 @@ class MovieListFragment : Fragment() {
 
         connectivityObserver = NetworkConnectivityObserver(requireContext())
         connectivityObserver.observe().onEach {
-            if(!it.name.matches(Regex("Available")))
+            if(it != ConnectivityObserver.Status.AVAILABLE)
             {
                 binding.showInternetStatus.visibility = View.VISIBLE
                 binding.rvMovieList.visibility = View.GONE
@@ -70,16 +70,16 @@ class MovieListFragment : Fragment() {
         }
 
         lifecycle.coroutineScope.launchWhenCreated {
-            movieListViewModel.movieList.collect() {
+            movieListViewModel.movieList.collect {
                 if(it.isLoading) {
                     binding.showLoading.visibility = View.VISIBLE
                 }
                 if(it.error.isNotBlank()) {
                     binding.showLoading.visibility = View.GONE
                 }
-                it.data?.let {
+                it.data?.let { movieLists ->
                     binding.showLoading.visibility = View.GONE
-                    movieListAdapter.setContentList(it.toMutableList())
+                    movieListAdapter.setContentList(movieLists.toMutableList())
                 }
             }
         }
@@ -96,7 +96,7 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MyViewHolder>() {
 
     private var listener :((MovieList)->Unit)?=null
 
-    var list = mutableListOf<MovieList>()
+    private var list = mutableListOf<MovieList>()
 
     fun setContentList(list: MutableList<MovieList>) {
         this.list = list
@@ -109,7 +109,7 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MovieListAdapter.MyViewHolder {
+    ): MyViewHolder {
         val binding =
             ViewHolderMovieListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
@@ -119,7 +119,7 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MyViewHolder>() {
         listener= l
     }
 
-    override fun onBindViewHolder(holder: MovieListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.viewHolder.movie = this.list[position]
 
         holder.viewHolder.root.setOnClickListener {

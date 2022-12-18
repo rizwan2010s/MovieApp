@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.onEach
 class MovieDetailFragment : Fragment() {
 
     private var _binding:FragmentMovieDetailBinding? = null
-    val binding:FragmentMovieDetailBinding
+    private val binding:FragmentMovieDetailBinding
     get() = _binding!!
 
     private val args: MovieDetailFragmentArgs by navArgs()
@@ -36,7 +36,7 @@ class MovieDetailFragment : Fragment() {
 
         connectivityObserver = NetworkConnectivityObserver(requireContext())
         connectivityObserver.observe().onEach {
-            if(!it.name.matches(Regex("Available")))
+            if(it != ConnectivityObserver.Status.AVAILABLE)
             {
                 binding.showInternetStatus.visibility = View.VISIBLE
                 binding.dataFetch.visibility = View.GONE
@@ -61,7 +61,7 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        args.movieId?.let {
+        args.movieId.let {
             viewModel.getMovieDetail(it)
         }
 
@@ -79,7 +79,7 @@ class MovieDetailFragment : Fragment() {
                 }
                 binding.showLoading.visibility = View.GONE
                 binding.dataFetch.visibility = View.VISIBLE
-                it.data?.let { binding.movieDetail= it }
+                it.data?.let { movieDetail -> binding.movieDetail= movieDetail }
             }
         }
 

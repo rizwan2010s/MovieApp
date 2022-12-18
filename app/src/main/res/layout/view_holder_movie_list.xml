@@ -35,9 +35,11 @@
                     android:id="@+id/view_holder_image"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    tools:contentDescription="@string/movieImage"
                     android:scaleType="fitXY"
                     app:urlToImage="@{movie.imagePath}"
-                    tools:src="@drawable/loading" />
+                    tools:src="@drawable/loading"
+                    android:contentDescription="@string/movieImage" />
 
                 <TextView
                     android:id="@+id/view_holder_item_name"
@@ -50,7 +52,8 @@
                     android:gravity="left|center"
                     android:textColor="@color/black"
                     android:text="@{movie.name}"
-                    tools:text="Movie Name" />
+                    tools:text="Movie Name"
+                    tools:ignore="RtlHardcoded" />
 
             </LinearLayout>
 

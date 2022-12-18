@@ -4,6 +4,4 @@ data class MovieList(
     val id:Int?,
     val name: String?,
     val imagePath: String?,
-) {
-
-}
+)
